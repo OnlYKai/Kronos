@@ -22,6 +22,12 @@ const centers = {
     yellow: [46, 168, 65]
 }
 
+
+
+
+
+const centersPos = []
+
 const pillars = {
     red: [],
     purple: [],
@@ -31,6 +37,7 @@ const pillars = {
 
 for (let key in centers) {
     let [cX, cY, cZ] = centers[key]
+    centersPos.push(new net.minecraft.util.BlockPos(cX, 205, cZ))
     for (let x = cX - 3; x <= cX + 3; x++) {
         for (let y = cY; y <= cY + 37; y++) {
             for (let z = cZ - 3; z <= cZ + 3; z++) {
@@ -45,36 +52,32 @@ for (let key in centers) {
 
 
 const tick = register("tick", () => {
-    const pY = Player.getY()
-    if (pY > 219 || pY < 160) return
-
+    ChatLib.chat("world")
     const world = World.getWorld()
+
+    if (!centersPos.every(pos => {
+        const blockState = world./*getBlockState()*/func_180495_p(pos)
+        return isDiorite(blockState) || blockState./*getBlock()*/func_177230_c().registryName === "minecraft:stained_glass"
+    })) return
+
     for (let key in pillars) {
         let pillar = pillars[key]
         for (let i = 0; i < pillar.length; i++) {
             let pos = pillar[i]
             let blockState = world./*getBlockState()*/func_180495_p(pos)
-            let block = blockState./*getBlock()*/func_177230_c()
-            let registryName = block.registryName
-            let blockMeta = block./*getMetaFromState()*/func_176201_c(blockState)
-            let isDiorite = registryName === "minecraft:stone" && (blockMeta === 3 || blockMeta === 4)
-            if (config.fuckDiorite === 1) {
-                let isWrongColor = registryName === "minecraft:stained_glass" && blockState./*getValue()*/func_177229_b(block./*VARIANT*/field_176547_a).toString() !== key
-                if (isDiorite || isWrongColor) world./*setBlockState()*/func_175656_a(pos, glassStates[key])
-            }
-            else if (config.fuckDiorite === 2) {
-                if (isDiorite || (registryName === "minecraft:stained_glass" && config.hurensohnAmount && (Math.random()*20|0) < config.hurensohnAmount)) world./*setBlockState()*/func_175656_a(pos, allGlassStates[Math.random()*16|0])
-            }
+            if (!isDiorite(blockState) && blockState./*getBlock()*/func_177230_c().registryName !== "minecraft:stained_glass") continue
+
+            if (config.fuckDiorite === 1) world./*setBlockState()*/func_175656_a(pos, glassStates[key])
+            else if (config.fuckDiorite === 2) world./*setBlockState()*/func_175656_a(pos, allGlassStates[Math.random()*16|0])
         }
     }
+
+    tick.unregister()
 }).unregister()
 
 
 
 const packetBlockChange = register("packetReceived", (packet) => {
-    const pY = Player.getY()
-    if (pY > 219 || pY < 160) return
-
     const blockState = packet./*blockState*/field_148883_d
     if (!isDiorite(blockState)) return
 
@@ -89,9 +92,6 @@ const packetBlockChange = register("packetReceived", (packet) => {
 
 
 const packetMultiBlockChange = register("packetReceived", (packet, event) => {
-    const pY = Player.getY()
-    if (pY > 219 || pY < 160) return
-
     const changes = []
     if (!packet./*getChangedBlocks()*/func_179844_a().every(changed => {
         const blockState = changed./*getBlockState()*/func_180088_c()
@@ -100,7 +100,8 @@ const packetMultiBlockChange = register("packetReceived", (packet, event) => {
             changes.push(blockPos)
             return true
         }
-        if (blockState./*getBlock()*/func_177230_c().registryName === "minecraft:piston_extension") return true
+        const registryName = blockState./*getBlock()*/func_177230_c().registryName
+        if (registryName === "minecraft:piston_extension" || registryName === "minecraft:stained_hardened_clay") return true
     })) return
     if (!changes.length) return
 

@@ -97,6 +97,13 @@ class Config {
     corpseEsp = false
 
     @SwitchProperty({
+        name: "§4Sphinx Auto Answer",
+        category: "General",
+        subcategory: "🌏Random Stuff"
+    })
+    sphinxAutoAnswer = false
+
+    @SwitchProperty({
         name: "Max Supercraft Amount",
         category: "General",
         subcategory: "🌏Random Stuff"
@@ -271,13 +278,6 @@ class Config {
     })
     springBootsHeight = false
 
-    @SwitchProperty({
-        name: "Inquisitor Info",
-        category: "HUD",
-        subcategory: "🌟Misc HUDs"
-    })
-    inquisitorInfo = false
-
     // ------------------------------ Dungeons ------------------------------
     @SwitchProperty({
         name: "§4Auto Close Chests",
@@ -309,25 +309,13 @@ class Config {
     })
     M3Timer = false
 
-    // ---------- Fuck Diorite ----------
     @SelectorProperty({
         name: "§4Fuck Diorite",
-        description: "§cBad Performance!",
         category: "Dungeons",
-        subcategory: "🌱Fuck Diorite",
-        options: ["Off", "On", "HURENSOHN"]
+        subcategory: "🌰Dungeons",
+        options: ["Off", "On", "Schitzo"]
     })
     fuckDiorite = 0;
-
-    @SliderProperty({
-        name: "§4How much HURENSOHN?",
-        description: "More HURENSOHN === Less FPS",
-        category: "Dungeons",
-        subcategory: "🌱Fuck Diorite",
-        min: 0,
-        max: 20
-    })
-    hurensohnAmount = 1;
 
     // ---------- Star Mob ESP ----------
     @SelectorProperty({

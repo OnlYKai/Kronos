@@ -7,6 +7,7 @@ import "./features/General/BetterTablist"
 import "./features/General/PearlRefill"
 import "./features/General/CancelBlockInteracts"
 import "./features/General/CorpseESP"
+import "./features/General/SphinxAutoAnswer"
 import "./features/General/SupercraftAmount"
 import "./features/General/ItemCreationDate"
 import "./features/General/ItemQualityAndFloor"
@@ -22,7 +23,6 @@ import "./features/HUD/InventoryHUD"
 import "./features/HUD/Spotify"
 import "./features/HUD/CakeTimer"
 import "./features/HUD/SpringBootsHeight"
-import "./features/HUD/InquisitorInfo"
 // ---------- Dungeons ----------
 import "./features/Dungeons/AutoCloseChests"
 import "./features/Dungeons/FuckDiorite"
@@ -84,13 +84,11 @@ function resetConfig() {
     // ---------- Better Tablist ----------
     config.betterTablist = false
     config.betterTablistHeader = "&z&lSKYBLOCK"
-    // ---------- Ghost Tools ----------
-    config.gTools = false
     // ---------- Random Stuff ----------
     config.pearlRefill = false
     config.cancelInteract = 0
     config.corpseEsp = false
-    config.iHateCarpet = 0
+    config.sphinxAutoAnswer = false
     config.supercraftAmount = false
     config.itemCreationDate = false
     config.itemQualityAndFloor = false
@@ -122,17 +120,13 @@ function resetConfig() {
     config.spotify = false
     config.cakeTimer = false
     config.springBootsHeight = false
-    config.inquisitorInfo = false
 
     // ------------------------------ Dungeons ------------------------------
     config.autoCloseChests = false
-    config.barClip = false
     config.hideBuggedStarMobNametags = false
     config.hideDinnerboneNametags = false
     config.M3Timer = false
-    // ---------- Fuck Diorite ----------
     config.fuckDiorite = 0
-    config.hurensohnAmount = 1
     // ---------- Star Mob ESP ----------
     config.starMobEsp = 0
     config.starMobEspChroma = false
@@ -166,7 +160,6 @@ function resetConfig() {
     // ---------- Dungeon Alerts ----------
     config.bloodSpawnedAlert = false
     config.bloodClearedAlert = false
-    config.hasteBugAlert = false
     // ---------- Kuudra Alerts ----------
     config.noKeyAlert = false
     config.stunnedAlert = false
