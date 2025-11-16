@@ -1,0 +1,15 @@
+{
+    "name": "Kronos",
+    "description": "Deez Nuts!",
+    "creator": "Kai",
+    "version": "0.1.8",
+    "entry": "index.js",
+    "requires": [
+        "Vigilance",
+        "PogData",
+        "RenderLibV2J",
+        "BeaconBeam",
+        "ShaderLib",
+        "ListFix"
+    ]
+}
