@@ -33,6 +33,4 @@ jobs:
           artifacts: "${{steps.get-name.outputs.name}}.zip"
           makeLatest: true
           allowUpdates: false
-          draft: false
-          prerelease: false
           token: ${{secrets.GITHUB_TOKEN}}
