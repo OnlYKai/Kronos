@@ -24,10 +24,9 @@ jobs:
 
       - name: Zip Files
         working-directory: ./
-        run: zip -r ./${{steps.get-name.outputs.name}}.zip ./*
+        run: zip -r ./${{steps.get-name.outputs.name}}.zip ./* ./.requires
 
       - name: Create Release
-        id: create-release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
