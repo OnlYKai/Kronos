@@ -1,6 +1,7 @@
 name: Release Module
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -26,13 +27,9 @@ jobs:
         run: zip -r ./${{steps.get-name.outputs.name}}.zip ./*
 
       - name: Create Release
-        id: create-release
-        uses: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v1
         with:
-          allowUpdates: true
-          name: ${{steps.get-version.outputs.version}}
-          tag: ${{steps.get-version.outputs.version}}
-          artifacts: "./${{steps.get-name.outputs.name}}.zip"
-          draft: false
-          prerelease: false
-          token: ${{secrets.GITHUB_TOKEN}}
+          files: "./${{steps.get-name.outputs.name}}.zip"
+          tag_name: ${{steps.get-version.outputs.version}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
