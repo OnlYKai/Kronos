@@ -23,7 +23,6 @@ jobs:
         run: echo "version=$(node ./.github/workflows/get-version.js)" >> $GITHUB_OUTPUT
 
       - name: Zip Files
-        working-directory: ./
         run: zip -r ./${{steps.get-name.outputs.name}}.zip ./* ./.requires
 
       - name: Create Release
@@ -31,5 +30,5 @@ jobs:
         with:
           name: ${{steps.get-version.outputs.version}}
           tag: ${{steps.get-version.outputs.version}}
-          artifacts: "./${{steps.get-name.outputs.name}}.zip"
+          artifacts: "${{steps.get-name.outputs.name}}.zip"
           token: ${{secrets.GITHUB_TOKEN}}
