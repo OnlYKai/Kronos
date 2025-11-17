@@ -27,9 +27,11 @@ jobs:
         run: zip -r ./${{steps.get-name.outputs.name}}.zip ./*
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        id: create-release
+        uses: ncipollo/release-action@v1
         with:
-          files: "./${{steps.get-name.outputs.name}}.zip"
-          tag_name: ${{steps.get-version.outputs.version}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          name: ${{steps.get-version.outputs.version}}
+          tag: ${{steps.get-version.outputs.version}}
+          artifacts: "./${{steps.get-name.outputs.name}}.zip"
+          token: ${{secrets.GITHUB_TOKEN}}
