@@ -31,6 +31,8 @@ jobs:
           name: ${{steps.get-version.outputs.version}}
           tag: ${{steps.get-version.outputs.version}}
           artifacts: "${{steps.get-name.outputs.name}}.zip"
+          makeLatest: true
+          allowUpdates: false
           draft: false
           prerelease: false
           token: ${{secrets.GITHUB_TOKEN}}
