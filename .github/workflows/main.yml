@@ -29,7 +29,6 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          allowUpdates: true
           name: ${{steps.get-version.outputs.version}}
           tag: ${{steps.get-version.outputs.version}}
           artifacts: "./${{steps.get-name.outputs.name}}.zip"
