@@ -1,4 +1,5 @@
 import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @ColorProperty, Color, @CheckboxProperty, @TextProperty, @SliderProperty } from "Vigilance"
+import request from "../requestV2"
 
 const configLines = FileLib.read("Kronos", "config.js").split("\n")
 const categories = configLines.filter(line => line.trim().startsWith("category:")).map(line => line.trim().replace(/^category: *("|'|`)|("|'|`),?$/g, ""))
@@ -58,13 +59,22 @@ class Config {
     // ---------- Update ----------
     @ButtonProperty({
         name: "Check for Updates",
-        description: "&aDownloads automatically!\n&cNeeds to be installed manually!",
+        description: "Opens your browser if you are not on the latest version",
         category: "General",
         subcategory: "Update",
-        placeholder: "Check & Download"
+        placeholder: "Check"
     })
     updateAction() {
-        console.log("button")
+        request({
+            url: "https://api.github.com/repos/OnlYKai/Kronos/releases/latest",
+            json: true
+        }).then((response) => {
+            const current_ver = JSON.parse(FileLib.read("Kronos", "./metadata.json")).version
+            const latest_ver = response.tag_name
+            if (current_ver !== latest_ver) {
+                java.awt.Desktop.getDesktop().browse(new java.net.URL("https://github.com/OnlYKai/Kronos/releases/latest").toURI())
+            }
+        })
     }
 
     // ---------- Better Tablist ----------
