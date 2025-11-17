@@ -32,7 +32,7 @@ jobs:
           allowUpdates: true
           name: ${{steps.get-version.outputs.version}}
           tag: ${{steps.get-version.outputs.version}}
-          artifacts: ./${{steps.get-name.outputs.name}}.zip
+          artifacts: ""./${{steps.get-name.outputs.name}}.zip"
           draft: false
           prerelease: false
           token: ${{secrets.GITHUB_TOKEN}}
