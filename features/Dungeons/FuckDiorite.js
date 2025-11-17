@@ -24,8 +24,6 @@ const centers = {
 
 
 
-
-
 const centersPos = []
 
 const pillars = {
@@ -52,7 +50,6 @@ for (let key in centers) {
 
 
 const tick = register("tick", () => {
-    ChatLib.chat("world")
     const world = World.getWorld()
 
     if (!centersPos.every(pos => {

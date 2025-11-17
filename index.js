@@ -158,6 +158,7 @@ function resetConfig() {
     config.dyeAlert = false
     config.rareSlayerDropAlert = false
     // ---------- Dungeon Alerts ----------
+    config.witherKeyAlert = false
     config.bloodSpawnedAlert = false
     config.bloodClearedAlert = false
     // ---------- Kuudra Alerts ----------

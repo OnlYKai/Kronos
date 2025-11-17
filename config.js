@@ -1,4 +1,4 @@
-import { @Vigilant, @SwitchProperty, @SelectorProperty, @ColorProperty, Color, @CheckboxProperty, @TextProperty, @SliderProperty } from "Vigilance"
+import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @ColorProperty, Color, @CheckboxProperty, @TextProperty, @SliderProperty } from "Vigilance"
 
 const configLines = FileLib.read("Kronos", "config.js").split("\n")
 const categories = configLines.filter(line => line.trim().startsWith("category:")).map(line => line.trim().replace(/^category: *("|'|`)|("|'|`),?$/g, ""))
@@ -55,6 +55,18 @@ class Config {
     }
 
     // ------------------------------ General ------------------------------
+    // ---------- Update ----------
+    @ButtonProperty({
+        name: "Check for Updates",
+        description: "&aDownloads automatically!\n&cNeeds to be installed manually!",
+        category: "General",
+        subcategory: "Update",
+        placeholder: "Check & Download"
+    })
+    updateAction() {
+        console.log("button")
+    }
+
     // ---------- Better Tablist ----------
     @SwitchProperty({
         name: "Better Tablist",
@@ -463,6 +475,13 @@ class Config {
     rareSlayerDropAlert = false
 
     // ---------- Dungeon Alerts ----------
+    @SwitchProperty({
+        name: "Wither Key Alert",
+        category: "Alerts",
+        subcategory: "🍑Dungeon Alerts"
+    })
+    witherKeyAlert = false
+
     @SwitchProperty({
         name: "Blood Spawned Alert",
         category: "Alerts",
