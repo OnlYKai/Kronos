@@ -31,5 +31,5 @@ jobs:
         with:
           name: ${{steps.get-version.outputs.version}}
           tag: ${{steps.get-version.outputs.version}}
-          artifacts: ./${{steps.get-name.outputs.name}}.zip
+          artifacts: "./${{steps.get-name.outputs.name}}.zip"
           token: ${{secrets.GITHUB_TOKEN}}
