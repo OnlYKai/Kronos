@@ -5,7 +5,7 @@ export function noSqrt3DDistance(mcEntity1, mcEntity2) {
     return dx * dx + dy * dy + dz * dz
 }
 
-export function getLerpedPosition(mcEntity, partialTicks = Tessellator.partialTicks) {
+export function getLerpedPosition(mcEntity, partialTicks=Tessellator.partialTicks) {
     return [
         mcEntity./*lastTickPosX*/field_70142_S + (mcEntity./*posX*/field_70165_t - mcEntity./*lastTickPosX*/field_70142_S) * partialTicks,
         mcEntity./*lastTickPosY*/field_70137_T + (mcEntity./*posY*/field_70163_u - mcEntity./*lastTickPosY*/field_70137_T) * partialTicks,

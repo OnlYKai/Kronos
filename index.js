@@ -1,5 +1,5 @@
 import config from "./config"
-import { Color } from "Vigilance"
+import { Color } from "../Vigilance"
 import hudManager from "./hudManager"
 
 // ---------- General ----------

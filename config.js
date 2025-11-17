@@ -1,5 +1,6 @@
-import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @ColorProperty, Color, @CheckboxProperty, @TextProperty, @SliderProperty } from "Vigilance"
+import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @ColorProperty, Color, @CheckboxProperty, @TextProperty, @SliderProperty } from "../Vigilance"
 import request from "../requestV2"
+import downloadFile from "./utils/Downloader"
 
 const configLines = FileLib.read("Kronos", "config.js").split("\n")
 const categories = configLines.filter(line => line.trim().startsWith("category:")).map(line => line.trim().replace(/^category: *("|'|`)|("|'|`),?$/g, ""))
@@ -72,7 +73,17 @@ class Config {
             const current_ver = JSON.parse(FileLib.read("Kronos", "./metadata.json")).version
             const latest_ver = response.tag_name
             if (current_ver !== latest_ver) {
-                java.awt.Desktop.getDesktop().browse(new java.net.URL("https://github.com/OnlYKai/Kronos/releases/latest").toURI())
+                //java.awt.Desktop.getDesktop().browse(new java.net.URL("https://github.com/OnlYKai/Kronos/releases/latest").toURI())
+                console.log("Downloading...")
+                downloadFile("https://github.com/OnlYKai/Kronos/releases/latest/download/Kronos.zip", "./config/ChatTriggers/modules/Kronos/test/Kronos.zip")
+                console.log("Downloaded!")
+                console.log("Unzipping...")
+                FileLib.unzip("./config/ChatTriggers/modules/Kronos/test/Kronos.zip", "./config/ChatTriggers/modules/Kronos/test/Kronos")
+                console.log("Unzipped!")
+                Client.scheduleTask(() => {
+                    if (Client.currentGui.get().class.getName() === "gg.essential.vigilance.gui.SettingsGui") Client.currentGui.close()
+                })
+                ChatLib.command("ct reload", true)
             }
         })
     }
