@@ -14,12 +14,12 @@ jobs:
       - name: Get Name
         id: get-name
         shell: bash
-        run: echo "::set-output name=name::$(node ./.github/workflows/get-name.js)"
+        run: echo "name=$(node ./.github/workflows/get-name.js)" >> $GITHUB_OUTPUT
 
       - name: Get Version
         id: get-version
         shell: bash
-        run: echo "::set-output name=version::$(node ./.github/workflows/get-version.js)"
+        run: echo "version=$(node ./.github/workflows/get-version.js)" >> $GITHUB_OUTPUT
 
       - name: Zip Files
         working-directory: ./
