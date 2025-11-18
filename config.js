@@ -2,6 +2,9 @@ import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @ColorP
 import request from "../requestV2"
 import downloadFile from "./utils/Downloader"
 
+const FileUtils = Java.type("org.apache.commons.io.FileUtils")
+const File = Java.type("java.io.File")
+
 const configLines = FileLib.read("Kronos", "config.js").split("\n")
 const categories = configLines.filter(line => line.trim().startsWith("category:")).map(line => line.trim().replace(/^category: *("|'|`)|("|'|`),?$/g, ""))
 @Vigilant("../../Kronos", "§zKronos §7(Move HUDs with /kronos gui)", {
