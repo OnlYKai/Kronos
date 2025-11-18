@@ -76,17 +76,19 @@ class Config {
             const current_ver = JSON.parse(FileLib.read("Kronos", "./metadata.json")).version
             const latest_ver = response.tag_name
             if (current_ver !== latest_ver) {
-                console.log("Clean old...")
+                console.log("Remove old files...")
                 try { FileUtils.cleanDirectory(new File("./config/ChatTriggers/modules/Kronos")) }
                 catch (e) { console.log("err") }
-                console.log("Cleaned!")
+                console.log("Removed!")
                 console.log("Downloading...")
                 downloadFile("https://github.com/OnlYKai/Kronos/releases/latest/download/Kronos.zip", "./config/ChatTriggers/modules/Kronos/Kronos.zip")
                 console.log("Downloaded!")
                 console.log("Unzipping...")
                 FileLib.unzip("./config/ChatTriggers/modules/Kronos/Kronos.zip", "./config/ChatTriggers/modules/Kronos")
                 console.log("Unzipped!")
-                FileLib.delete("Kronos", "./config/ChatTriggers/modules/Kronos/Kronos.zip")
+                console.log("Cleanup...")
+                FileLib.delete("Kronos", "Kronos.zip")
+                console.log("Cleaned!")
                 Client.scheduleTask(() => {
                     if (Client.currentGui.get().class.getName() === "gg.essential.vigilance.gui.SettingsGui") Client.currentGui.close()
                 })
